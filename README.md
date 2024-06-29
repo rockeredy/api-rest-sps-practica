@@ -22,7 +22,7 @@
     
    Incluí una versión visible en el archivo y comentarios detallados en cada paso del archivo YML. Estos comentarios los incluyo para asegurarme que cualquier miembro del equipo pueda entender y modificar el pipeline en el futuro.
     
-6. Añadí al archivo YML los jobs
+6. Añadí al archivo YML jobs
 
    Seguí la estructura de la documentación y ejemplo del pdf, todo lo estoy ejecutando bajo de "ubuntu-latest"
    Para ejecutar correctamente spring utilizo la versión de java 11 (JDK 11) meidnate un action
