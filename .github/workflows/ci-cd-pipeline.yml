@@ -31,8 +31,8 @@ jobs:
     - name: Download Maven Wrapper JAR
       run: curl -L -o .mvn/wrapper/maven-wrapper.jar https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.5/maven-wrapper-0.5.5.jar
 
-    - name: Download Maven Wrapper Properties
-      run: curl -L -o .mvn/wrapper/maven-wrapper.properties https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.5/maven-wrapper-0.5.5.properties
+    - name: Create Maven Wrapper Properties
+      run: echo 'distributionUrl=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.6.3/apache-maven-3.6.3-bin.zip' > .mvn/wrapper/maven-wrapper.properties
 
     - name: Set executable permissions for mvnw
       run: chmod +x mvnw mvnw.cmd
