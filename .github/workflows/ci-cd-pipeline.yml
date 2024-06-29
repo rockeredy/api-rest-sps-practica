@@ -25,8 +25,9 @@ jobs:
         java-version: '11'
         distribution: 'adopt'  # Specify the distribution
 
-    - name: Install Maven Wrapper
+    - name: Prepare Maven Wrapper
       run: |
+        mkdir -p .mvn/wrapper
         curl -L -o mvnw https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.5/maven-wrapper-0.5.5.jar
         curl -L -o .mvn/wrapper/maven-wrapper.properties https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.5/maven-wrapper-0.5.5.jar
         chmod +x mvnw
