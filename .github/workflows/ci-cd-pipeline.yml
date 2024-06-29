@@ -1,0 +1,13 @@
+#Version: 1.0
+# This file configures the continuous integration and continuous delivery (CI/CD) pipeline
+# for the REST API project developed in Java with Spring Boot.
+
+name: CI/CD pipeline
+# Define events triggering the pipeline
+on:
+  pull_request:
+    branches:
+      - main # Run pipeline on Pull Requests to main branch
+  push:
+    branches:
+      - main # Run pipeline on push to main branch
