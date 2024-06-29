@@ -25,13 +25,14 @@ jobs:
         java-version: '11'
         distribution: 'adopt'  # Specify the distribution
 
-    - name: Make mvnw executable
-      run: chmod +x mvnw # add permisions
-
     - name: Install Maven Wrapper
       run: |
-        ./mvnw wrapper:install
-        ./mvnw clean package
+        curl -L -o mvnw https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.5/maven-wrapper-0.5.5.jar
+        curl -L -o .mvn/wrapper/maven-wrapper.properties https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.5/maven-wrapper-0.5.5.jar
+        chmod +x mvnw
+        
+    - name: Build with Maven
+      run: ./mvnw clean package # Execute mvnw using Bash on Linux or cmd.exe on Windows
 
     - name: Store JAR Artifact # Save artifact.jar
       uses: actions/upload-artifact@v3
