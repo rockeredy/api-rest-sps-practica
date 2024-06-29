@@ -13,7 +13,7 @@ on:
       - main # Run pipeline on push to main branch
 jobs:
   build:
-    runs-on: windows-latest # Use Windows runner
+    runs-on: ubuntu-latest # Use Windows runner
 
     steps:
     - name: Checkout code
@@ -30,7 +30,7 @@ jobs:
         curl -L -o mvnw https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.5/maven-wrapper-0.5.5.jar
         curl -L -o .mvn/wrapper/maven-wrapper.properties https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.5/maven-wrapper-0.5.5.jar
         chmod +x mvnw
-        
+
     - name: Build with Maven
       run: ./mvnw clean package # Execute mvnw using Bash on Linux or cmd.exe on Windows
 
