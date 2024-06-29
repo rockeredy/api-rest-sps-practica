@@ -40,5 +40,7 @@
 
 9. Me encontre con un error relacionado a mvnw.cmd
 
-   Al ver este error me di cuenta de que estaba mal planteado el sistema operativo que elgí inicialmente de Ubuntu por lo que decidí cambiarlo a Windows para probar
-   una vez cambiado me salio otro error relacionado a que no podia ejecutar el archivo mvnw.cmd, por que opte agregarle mas parametros al run, tratando de especificar que utilizará el programa "cmd.exe" que windows tiene como terminal
+   Al ver este error me di cuenta de que estaba mal planteado el sistema operativo que elgí inicialmente de Ubuntu por lo que decidí cambiarlo a Windows.
+   Una vez cambiado me salio otro error relacionado a que no podia ejecutar el archivo mvnw.cmd, por que opte agregarle mas parametros al run, tratando de especificar que se ejecutara de forma correcta, sin embargo tambien me enocntre con pasos adicionales como crear carpetas para almacenar las descargas de las dependencias.
+   Actualice mi archivo YML y actualicé la etiqueta de la versión @3 a @4 para seguir una buena practica de control de versión
+
