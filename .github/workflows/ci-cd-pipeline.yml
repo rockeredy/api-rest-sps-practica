@@ -28,8 +28,10 @@ jobs:
     - name: Make mvnw executable
       run: chmod +x mvnw # add permisions
 
-    - name: Build with Maven
-      run: ./mvnw clean package # Execute mvnw
+    - name: Install Maven Wrapper
+      run: |
+        ./mvnw wrapper:install
+        ./mvnw clean package
 
     - name: Store JAR Artifact # Save artifact.jar
       uses: actions/upload-artifact@v3
