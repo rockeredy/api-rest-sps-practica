@@ -26,8 +26,8 @@ jobs:
         distribution: 'adopt'  # Specify the distribution
 
     - name: Build with Maven
-      run: mvnw.cmd clean package # Action to compile and package application
-
+      run: cmd /c mvnw.cmd clean package # Execute mvnw.cmd using cmd.exe
+      
     - name: Store JAR Artifact # Save artifact.jar
       uses: actions/upload-artifact@v3
       with:
