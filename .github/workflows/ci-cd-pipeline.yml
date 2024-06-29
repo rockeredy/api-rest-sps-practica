@@ -48,3 +48,10 @@ jobs:
       with:
         name: artifact
         path: target/*.jar
+
+    - name: Merge pull request
+      if: success() && github.event_name == 'pull_request'
+      uses: peter-evans/merge-pull-request@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        merge-method: squash # or "merge" or "rebase"

@@ -45,5 +45,6 @@
    Actualice mi archivo YML y actualicé la etiqueta de la versión @3 a @4 para seguir una buena practica de control de versión
 
 10. Validacion de pruebas para construir y probar la aplicación
-    Decidí continuar con el paso de agregar el "Comando mvnw verify" para valdiar si se podia hacer el merge
-
+    Decidí continuar con el paso de agregar el "Comando mvnw verify" para valdiar si se podia hacer el merge, actualice mi archivo ci-cd-pipeline.yml
+    Después me dirigi a github a modigicar la configuración del repositorio en settings y agregue una regla "merge permission" para aprobar o rechazar según el resultado del test.
+    En github agregue Require status checks to pass y asigne un job build-and-test. Por ultimo volvia modificar mi Yaml para agregar esto ultimo y utilicé el GitHub Actions de "peter-evans/merge-pull-request" para lograr esto actualice los mpermisos del Workflow del repositorio a escritura y lectura
