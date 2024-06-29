@@ -25,10 +25,17 @@ jobs:
         java-version: '11'
         distribution: 'adopt'  # Specify the distribution
 
+    - name: Create Maven Wrapper directories
+      run: mkdir -p .mvn/wrapper
+
     - name: Download Maven Wrapper JAR
-      run: |
-        mkdir -p .mvn/wrapper
-        curl -L -o .mvn/wrapper/maven-wrapper.jar https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.5/maven-wrapper-0.5.5.jar
+      run: curl -L -o .mvn/wrapper/maven-wrapper.jar https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.5/maven-wrapper-0.5.5.jar
+
+    - name: Download Maven Wrapper Properties
+      run: curl -L -o .mvn/wrapper/maven-wrapper.properties https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.5/maven-wrapper-0.5.5.properties
+
+    - name: Set executable permissions for mvnw
+      run: chmod +x mvnw mvnw.cmd
 
     - name: Build with Maven
       run: cmd /c mvnw.cmd clean package # Execute mvnw.cmd using cmd.exe
