@@ -43,6 +43,15 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- Plugin for deploying artifacts to GitHub Packages -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip> <!-- Set skip to true to avoid deployment during standard build -->
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
