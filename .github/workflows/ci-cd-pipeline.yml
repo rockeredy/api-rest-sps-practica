@@ -11,6 +11,7 @@ on:
   push:
     branches:
       - main # Run pipeline on push to main branch
+
 jobs:
   build-and-test:
     runs-on: windows-latest # Use Windows runner
@@ -49,9 +50,9 @@ jobs:
         name: artifact
         path: target/*.jar
 
-    - name: Merge pull request
-      if: success() && github.event_name == 'pull_request'
-      uses: peter-evans/merge-pull-request@v3
+    - name: Merge a pull request if tests pass
+      uses: sudo-bot/action-pull-request-merge@v1.2.0
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        merge-method: squash # or "merge" or "rebase"
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        number: ${{ github.event.pull_request.number }}
+        allowed-usernames-regex: ^rockeredy$
