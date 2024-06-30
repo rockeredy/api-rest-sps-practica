@@ -65,8 +65,10 @@
 
 # Preguntas
 
-- ¿Consideras útil agrega la acción de caché al workflow? Si consideras que sí, agrégala.
+- ¿Consideras útil agrega la acción de caché al workflow?
+  
    Si, para mejorar el rendimiento y evitar la descarga repetida de dependencias de Maven y otros archivos necesarios en cada ejecución.
 
 - ¿Es posible desplegar automáticamente el artefacto guardado en Packages con Github Actions? 
+  
    Considero que si es posible, agregué el mensaje solicitado de “Despliegue en curso" en mi job de "publish"
