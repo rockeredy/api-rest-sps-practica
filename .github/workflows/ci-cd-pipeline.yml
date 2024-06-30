@@ -65,7 +65,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "//maven.pkg.github.com/rockeredy/api-rest-sps-practica:_authToken=\${GITHUB_TOKEN}" > ~/.m2/settings.xml
+        echo "<settings><servers><server><id>github</id><username>rockeredy</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
         mvn deploy:deploy-file \
           -Dfile=target/artifact.jar \
           -DrepositoryId=github \
