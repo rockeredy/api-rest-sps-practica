@@ -46,7 +46,10 @@
 
 10. Validacion de pruebas para construir y probar la aplicación
 
-    Evalue los logs al correr el archivo mvnw en  la tarea de "Build with Maven" y cree otra tarea "Check test results" para poder evaluar los resultados de la prueba creando un archivo temporal maven-output.log en la tarea de "Build with Maven", fue un reto ya que la sintaxis de evaluación me marcaba error ya que lo tubve que traducir en terminos de sintaxis de windows, especificamente de powershell.
+    Evalue los logs al correr el archivo mvnw en  la tarea de "Build with Maven" y cree otra tarea "Check test results" para poder evaluar los resultados de la prueba creando un archivo temporal maven-output.log en la tarea de "Build with Maven", fue un reto ya que la sintaxis de evaluación me marcaba error y lo tuve que traducir en terminos de sintaxis de windows, especificamente de powershell para tener una mejor visualización de lo que estaba obteneindo por que tenia algunos errores de sintaxis y conecptualziacion, con esto lo solucione
 
-    Después me dirigi a github a modificar la configuración del repositorio en settings y agregue una regla "merge permission" para aprobar o rechazar según el resultado del "Check test results".
-    Por ultimo modifique mi Yaml para agregar un GitHub Actions "sudo-bot/action-pull-request-merge@v1.2.0" y con esto permitir el merge en caso de que no exita erro, para lograr esto tambien actualicé los permisos del Workflow del repositorio a escritura y lectura.
+    Después me dirigi a github a modificar la configuración del repositorio en settings y agregue una regla "merge permission" para aprobar o rechazar según el resultado del job "build-and-test" con la opcion de "Require status checks to pass" y subopción de "Require branches to be up to date before merging" en esta ultima agregue el nombre del job:"build-and-test".
+    Por ultimo modifique mi Yaml y agregue permisos al repositorio de escritura y lectura.
+
+    Cree una rama para probar los test y realice varios escenarios(hice varias solicitudes de pull request), intencionalmente modifique los test del codigo de java para que marcara errores y efectivamente no paso el pull requeste con el merge, hice un revert y lo deje como estaba originalmente sin errores
+
