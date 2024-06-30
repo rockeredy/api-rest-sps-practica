@@ -55,13 +55,13 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        mvn deploy:deploy-file \
-          -Dfile=target/unit-vs-int-0.0.1-SNAPSHOT.jar \
-          -DrepositoryId=github \
-          -Durl=https://maven.pkg.github.com/rockeredy/api-rest-sps-practica \
-          -DgroupId=danvega.dev \
-          -DartifactId=unit-vs-int \
-          -Dversion=0.0.1-SNAPSHOT \
-          -Dpackaging=jar \
-          -DgeneratePom=false \
+        mvn deploy:deploy-file `
+          -Dfile=target/unit-vs-int-0.0.1-SNAPSHOT.jar `
+          -DrepositoryId=github `
+          -Durl=https://maven.pkg.github.com/rockeredy/api-rest-sps-practica `
+          -DgroupId=danvega.dev `
+          -DartifactId=unit-vs-int `
+          -Dversion=0.0.1-SNAPSHOT `
+          -Dpackaging=jar `
+          -DgeneratePom=false `
           -DpomFile=pom.xml
