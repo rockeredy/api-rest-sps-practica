@@ -3,6 +3,7 @@
 # for the REST API project developed in Java with Spring Boot.
 
 name: CI/CD pipeline
+
 # Define events triggering the pipeline
 on:
   pull_request:
@@ -51,10 +52,10 @@ jobs:
         path: target/*.jar
 
     - name: Merge a pull request if tests pass
-      if: ${{ github.event_name == 'pull_request' && success() }}
+      if: ${{ success() && github.event_name == 'pull_request' }}
       uses: sudo-bot/action-pull-request-merge@v1.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         number: ${{ github.event.pull_request.number }}
-        allowed-usernames-regex: ^rockeredy$
         merge-method: merge
+        allowed-usernames-regex: ^rockeredy$
