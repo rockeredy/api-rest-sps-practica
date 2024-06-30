@@ -66,12 +66,3 @@ jobs:
       with:
         name: artifact
         path: target/*.jar
-
-    - name: Merge a pull request if tests pass # Conditionally merge if tests pass and it's a pull request
-      if: ${{ success() && github.event_name == 'pull_request' }}
-      uses: sudo-bot/action-pull-request-merge@v1.2.0
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        number: ${{ github.event.pull_request.number }}
-        merge-method: merge
-        allowed-usernames-regex: ^rockeredy$
