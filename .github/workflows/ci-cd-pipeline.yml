@@ -86,7 +86,7 @@ jobs:
       - name: Store JAR Artifact # Save unit-vs-int JAR
         uses: actions/upload-artifact@v4
         with:
-          name: unit-vs-int
+          name: unit-vs-int${{ github.run_number }} #add dynamic name to save artefact
           path: target/unit-vs-int-0.0.1-SNAPSHOT.jar
   
       - name: Publish JAR to GitHub Packages
