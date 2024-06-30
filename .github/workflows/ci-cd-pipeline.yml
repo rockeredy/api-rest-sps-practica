@@ -14,7 +14,7 @@ on:
       - main # Run pipeline on push to main branch
 
 jobs:
-  build-and-publish:
+  build:
     runs-on: windows-latest # Use Windows runner
 
     steps:
@@ -45,6 +45,37 @@ jobs:
     - name: Build with Maven
       run: cmd /c mvnw.cmd clean package # Execute mvnw.cmd using cmd.exe to build the project
 
+  test:
+    runs-on: windows-latest # Use Windows runner
+    needs: build # Only run tests if the build job completes successfully
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4 # Action to clone the repository inside the container
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4 # Set up JDK 11
+      with:
+        java-version: '11'
+        distribution: 'adopt'  # Specify the distribution
+
+    - name: Run tests with Maven
+      run: cmd /c mvnw.cmd test # Execute mvnw.cmd using cmd.exe to run tests
+
+  publish:
+    runs-on: windows-latest # Use Windows runner
+    needs: test # Only run publish if the test job completes successfully
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4 # Action to clone the repository inside the container
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4 # Set up JDK 11
+      with:
+        java-version: '11'
+        distribution: 'adopt'  # Specify the distribution
+
     - name: Store JAR Artifact # Save unit-vs-int JAR
       uses: actions/upload-artifact@v4
       with:
@@ -54,4 +85,14 @@ jobs:
     - name: Publish JAR to GitHub Packages
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: cmd /c mvnw.cmd deploy
+      run: |
+        mvn deploy:deploy-file \
+          -Dfile=target/unit-vs-int-0.0.1-SNAPSHOT.jar \
+          -DrepositoryId=github \
+          -Durl=https://maven.pkg.github.com/rockeredy/api-rest-sps-practica \
+          -DgroupId=danvega.dev \
+          -DartifactId=unit-vs-int \
+          -Dversion=0.0.1-SNAPSHOT \
+          -Dpackaging=jar \
+          -DgeneratePom=false \
+          -DpomFile=pom.xml
