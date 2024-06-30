@@ -45,21 +45,11 @@ jobs:
     - name: Build with Maven
       run: cmd /c mvnw.cmd clean package # Execute mvnw.cmd using cmd.exe to build the project
 
-    - name: Check test results
-      run: |
-        # Parse Maven output to check test results
-        $TESTS_RUN = Select-String -Path maven-output.log -Pattern '(?<=Tests run: )\d+' | ForEach-Object { $_.Matches.Value }
-        $FAILURES = Select-String -Path maven-output.log -Pattern '(?<=Failures: )\d+' | ForEach-Object { $_.Matches.Value }
-        $ERRORS = Select-String -Path maven-output.log -Pattern '(?<=Errors: )\d+' | ForEach-Object { $_.Matches.Value }
-        $SKIPPED = Select-String -Path maven-output.log -Pattern '(?<=Skipped: )\d+' | ForEach-Object { $_.Matches.Value }
-
-        Write-Output "Tests run: $TESTS_RUN, Failures: $FAILURES, Errors: $ERRORS, Skipped: $SKIPPED"
-
-        # Fail the job if there are test failures or errors
-        if ($FAILURES -ne "0" -or $ERRORS -ne "0") {
-          Write-Output "Tests failed. Exiting with error."
-          exit 1
-        }
+    - name: Store JAR Artifact # Save artifact.jar
+      uses: actions/upload-artifact@v4
+      with:
+        name: artifact
+        path: target/*.jar
 
     - name: Publish JAR to GitHub Packages
       env:
@@ -76,9 +66,3 @@ jobs:
           -Dpackaging=jar \
           -DgeneratePom=false \
           -DpomFile=pom.xml
-
-    - name: Store JAR Artifact # Save artifact.jar
-      uses: actions/upload-artifact@v4
-      with:
-        name: artifact
-        path: target/*.jar
