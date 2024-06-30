@@ -84,6 +84,9 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+              
+      - name: Print Deployment Message
+        run: echo "Despliegue en curso"  # Simulate deployment process
 
       - name: Publish JAR to GitHub Packages
         env:
