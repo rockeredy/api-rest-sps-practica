@@ -14,7 +14,7 @@ on:
       - main # Run pipeline on push to main branch
 
 jobs:
-  build-and-test:
+  build-and-publish:
     runs-on: windows-latest # Use Windows runner
 
     steps:
