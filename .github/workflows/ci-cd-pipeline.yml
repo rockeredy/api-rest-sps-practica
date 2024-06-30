@@ -14,7 +14,7 @@ on:
       - main # Run pipeline on push to main branch
 
 jobs:
-  build-and-publish:
+  build-and-test:
     runs-on: windows-latest # Use Windows runner
 
     steps:
@@ -50,6 +50,20 @@ jobs:
       with:
         name: unit-vs-int
         path: target/unit-vs-int-0.0.1-SNAPSHOT.jar
+
+  publish:
+    runs-on: windows-latest # Use Windows runner
+    needs: build-and-test # This job depends on the success of build-and-test job
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4 # Action to clone the repository inside the container
+
+    - name: Download JAR Artifact # Download the JAR artifact from previous job
+      uses: actions/download-artifact@v4
+      with:
+        name: unit-vs-int
+        path: target
 
     - name: Publish JAR to GitHub Packages
       env:
