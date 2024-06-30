@@ -59,6 +59,10 @@
     
     posteriormente agregue un job "publish" que dependia de build-and-test para publicar el artefacto generado en packages.
 
+12. Implementación de cache
+
+    Al momento del job de publicar(publish) agregue un paso para agregar cache.
+
 # Preguntas
 
 - ¿Consideras útil agrega la acción de caché al workflow? Si consideras que sí, agrégala.
