@@ -40,10 +40,26 @@ jobs:
       run: chmod +x mvnw mvnw.cmd
 
     - name: Verify with Maven
-      run: cmd /c mvnw.cmd verify # Execute mvnw.cmd using cmd.exe to run tests
+      run: cmd /c mvnw.cmd verify | tee maven-output.log  # Execute mvnw.cmd using cmd.exe to run tests and save output
 
     - name: Build with Maven
       run: cmd /c mvnw.cmd clean package # Execute mvnw.cmd using cmd.exe to build the project
+
+    - name: Check test results
+      run: |
+        # Parse Maven output to check test results
+        TESTS_RUN=$(grep -Po '(?<=Tests run: )\d+' maven-output.log)
+        FAILURES=$(grep -Po '(?<=Failures: )\d+' maven-output.log)
+        ERRORS=$(grep -Po '(?<=Errors: )\d+' maven-output.log)
+        SKIPPED=$(grep -Po '(?<=Skipped: )\d+' maven-output.log)
+
+        echo "Tests run: $TESTS_RUN, Failures: $FAILURES, Errors: $ERRORS, Skipped: $SKIPPED"
+
+        # Fail the job if there are test failures or errors
+        if [ $FAILURES -ne 0 ] || [ $ERRORS -ne 0 ]; then
+          echo "Tests failed. Exiting with error."
+          exit 1
+        fi
 
     - name: Store JAR Artifact # Save artifact.jar
       uses: actions/upload-artifact@v4
@@ -51,7 +67,7 @@ jobs:
         name: artifact
         path: target/*.jar
 
-    - name: Merge a pull request if tests pass
+    - name: Merge a pull request if tests pass # Conditionally merge if tests pass and it's a pull request
       if: ${{ success() && github.event_name == 'pull_request' }}
       uses: sudo-bot/action-pull-request-merge@v1.2.0
       with:
