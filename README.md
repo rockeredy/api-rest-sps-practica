@@ -53,8 +53,13 @@
 
     Cree una rama para probar los test y realice varios escenarios(hice varias solicitudes de pull request), intencionalmente modifique los test del codigo de java para que marcara errores y efectivamente no paso el pull requeste con el merge, hice un revert y lo deje como estaba originalmente sin errores
 
-11. Publicación de artefacto en github packages
+11. Publicación de artefactos en github packages
 
     Modifique el archivo pom.xml devido a que me enfrente a erroes por que no estava especificado "distributionManagement" para lograr publicar el artefacto en los packages de github, esto lo encontre en la documentacion https://docs.github.com/es/actions/using-workflows/storing-workflow-data-as-artifacts
     
     posteriormente agregue un job "publish" que dependia de build-and-test para publicar el artefacto generado en packages.
+
+# Preguntas
+
+- ¿Consideras útil agrega la acción de caché al workflow? Si consideras que sí, agrégala.
+   Si, para mejorar el rendimiento y evitar la descarga repetida de dependencias de Maven y otros archivos necesarios en cada ejecución.
