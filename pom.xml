@@ -43,16 +43,19 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- Plugin for deploying artifacts to GitHub Packages -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
-				<configuration>
-					<skip>true</skip> <!-- Set skip to true to avoid deployment during standard build -->
-				</configuration>
+				<version>2.8.2</version>
 			</plugin>
-
 		</plugins>
 	</build>
 
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub rockeredy Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/rockeredy/api-rest-sps-practica</url>
+		</repository>
+	</distributionManagement>
 </project>
