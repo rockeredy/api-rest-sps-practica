@@ -45,9 +45,6 @@ jobs:
     - name: Build with Maven
       run: cmd /c mvnw.cmd clean package # Execute mvnw.cmd using cmd.exe to build the project
 
-    - name: List files in target directory
-      run: cmd /c dir target\*.jar  # List JAR files to verify presence
-
     - name: Store JAR Artifact # Save unit-vs-int JAR
       uses: actions/upload-artifact@v4
       with:
@@ -57,14 +54,4 @@ jobs:
     - name: Publish JAR to GitHub Packages
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        mvn deploy:deploy-file ^
-          -Dfile=target/unit-vs-int-0.0.1-SNAPSHOT.jar ^
-          -DrepositoryId=github ^
-          -Durl=https://maven.pkg.github.com/rockeredy/api-rest-sps-practica ^
-          -DgroupId=danvega.dev ^
-          -DartifactId=unit-vs-int ^
-          -Dversion=0.0.1-SNAPSHOT ^
-          -Dpackaging=jar ^
-          -DgeneratePom=false ^
-          -DpomFile=pom.xml
+      run: cmd /c mvnw.cmd deploy
