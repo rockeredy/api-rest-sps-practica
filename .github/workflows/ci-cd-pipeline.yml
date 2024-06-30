@@ -14,7 +14,7 @@ on:
       - main # Run pipeline on push to main branch
 
 jobs:
-  build-and-test:
+  build-and-publish:
     runs-on: windows-latest # Use Windows runner
 
     steps:
@@ -60,6 +60,22 @@ jobs:
           Write-Output "Tests failed. Exiting with error."
           exit 1
         }
+
+    - name: Publish JAR to GitHub Packages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "//maven.pkg.github.com/rockeredy/api-rest-sps-practica:_authToken=\${GITHUB_TOKEN}" > ~/.m2/settings.xml
+        mvn deploy:deploy-file \
+          -Dfile=target/artifact.jar \
+          -DrepositoryId=github \
+          -Durl=https://maven.pkg.github.com/rockeredy/api-rest-sps-practica \
+          -DgroupId=com.example \
+          -DartifactId=artifact \
+          -Dversion=1.0.0 \
+          -Dpackaging=jar \
+          -DgeneratePom=false \
+          -DpomFile=pom.xml
 
     - name: Store JAR Artifact # Save artifact.jar
       uses: actions/upload-artifact@v4
