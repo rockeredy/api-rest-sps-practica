@@ -51,7 +51,7 @@ jobs:
         path: target/*.jar
 
     - name: Merge a pull request if tests pass
-      if: ${{ github.event_name == 'pull_request' }}
+      if: ${{ github.event_name == 'pull_request' && success() }}
       uses: sudo-bot/action-pull-request-merge@v1.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
